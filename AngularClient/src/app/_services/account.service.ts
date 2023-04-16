@@ -5,12 +5,14 @@ import { map } from 'rxjs/operators'
 import { nameOf } from '../utils/helpers'
 import { setItemToLocalStorage, removeItemFromLocalStorage } from '../utils/localStorage'
 import User from '../_models/user'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   	providedIn: 'root'
 })
+
 export class AccountService {
-	baseUrl = 'http://localhost:5000/api'
+	baseUrl = environment.apiUrl
 	private currentUserSource = new ReplaySubject<User>(1)
 	currentUser$ = this.currentUserSource.asObservable()
 

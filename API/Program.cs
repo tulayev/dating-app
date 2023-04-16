@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +13,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAppServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
-var app = builder.Build();
+var app = await builder.Build().MigrateDatabaseAsync();
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

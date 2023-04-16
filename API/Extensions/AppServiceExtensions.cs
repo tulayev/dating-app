@@ -1,5 +1,8 @@
-﻿using Data;
+﻿using API.Repository;
+using API.Repository.IRepository;
+using Data;
 using Microsoft.EntityFrameworkCore;
+using Services.AutoMapper;
 using Services.TokenService;
 
 namespace API.Extensions
@@ -12,7 +15,9 @@ namespace API.Extensions
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
