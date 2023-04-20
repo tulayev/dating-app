@@ -22,11 +22,24 @@
                 class="dropdown" 
                 dropdown
             >
-                <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{ user.username | titlecase }}</a>
+                <img src="{{ user.photoUrl }}" alt="{{ user.username}}" />
+                <a class="dropdown-toggle text-light ml-2" dropdownToggle>
+                    Welcome {{ user.username | titlecase }}
+                </a>
                 <div class="dropdown-menu mt-3" *dropdownMenu>
-                    <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
+                    <a 
+                        routerLink="/member/edit" 
+                        class="dropdown-item"
+                    >
+                        Edit Profile
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a (click)="logout()" class="dropdown-item">Logout</a>
+                    <a 
+                        (click)="logout()" 
+                        class="dropdown-item"
+                    >
+                        Logout
+                    </a>
                 </div>
             </div>
             

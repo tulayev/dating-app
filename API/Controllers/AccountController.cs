@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using API.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -11,18 +11,19 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         
         private readonly ITokenService _tokenService;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(IUnitOfWork unitOfWork, ITokenService tokenService)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _tokenService = tokenService;
         }
 
         private async Task<bool> UserExists(string username) =>
-            await _context.Users.AnyAsync(u => u.UserName == username.ToLower());
+            await _unitOfWork.GetQueryable<AppUser>()
+                .AnyAsync(u => u.UserName == username.ToLower());
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -39,8 +40,8 @@ namespace API.Controllers
                 PasswordSalt = hmac.Key
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.AddAsync(user);
+            await _unitOfWork.SaveChangesAsync();
 
             return new UserDto
             {
@@ -52,7 +53,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.UserName.ToLower());
+            var user = await _unitOfWork.GetQueryable<AppUser>()
+                .Include(u => u.Photos)
+                .FirstOrDefaultAsync(u => u.UserName == loginDto.UserName.ToLower());
 
             if (user == null)
                 return Unauthorized("Invalid username");
@@ -70,7 +73,8 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url
             };
         }
     }

@@ -22,10 +22,8 @@ export class AccountService {
 		return this.http.post(`${this.baseUrl}/account/login`, model)
 			.pipe(
 				map((user: User) => {
-					if (user) {
-						setItemToLocalStorage(nameOf(() => user), user)
-						this.currentUserSource.next(user)
-					}
+					if (user)
+						this.setCurrentUser(user)
 				})
 			)
 	}
@@ -34,15 +32,14 @@ export class AccountService {
 		return this.http.post(`${this.baseUrl}/account/register`, model)
 			.pipe(
 				map((user: User) => {
-					if (user) {
-						setItemToLocalStorage(nameOf(() => user), user)
-						this.currentUserSource.next(user)
-					}
+					if (user) 
+						this.setCurrentUser(user)
 				})
 			)
 	}
 
 	setCurrentUser(user: User) {
+		setItemToLocalStorage(nameOf(() => user), user)
 		this.currentUserSource.next(user)
 	}
 
