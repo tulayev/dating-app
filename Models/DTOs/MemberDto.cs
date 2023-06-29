@@ -12,7 +12,7 @@
 
         public string KnownAs { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public DateTime LastActive { get; set; } 
 

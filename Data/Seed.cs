@@ -14,7 +14,7 @@ namespace Data
                 return;
 
             string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, @"Data/seed.json");
-            var userData = await File.ReadAllTextAsync(filePath);
+            string userData = await File.ReadAllTextAsync(filePath);
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
             foreach (var user in users)

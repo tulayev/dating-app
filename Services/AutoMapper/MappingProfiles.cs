@@ -16,6 +16,11 @@ namespace Services.AutoMapper
             CreateMap<MemberUpdateDto, AppUser>();
 
             CreateMap<RegisterDto, AppUser>();
+
+            CreateMap<AppUser, LikeDto>()
+                .ForMember(d => d.UserId, o => o.MapFrom(s => s.Id)) 
+                .ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(p => p.IsMain).Url)) 
+                .ForMember(d => d.Age, o => o.MapFrom(s => s.GetAge())); 
         }
     }
 }

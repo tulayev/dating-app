@@ -1,5 +1,5 @@
-﻿using API.Repository;
-using API.Repository.IRepository;
+﻿using API.Helpers;
+using API.Repositories;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Services.AutoMapper;
@@ -17,10 +17,11 @@ namespace API.Extensions
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
-            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<LogUserActivity>();
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             return services;
         }
