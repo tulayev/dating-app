@@ -1,10 +1,10 @@
-﻿namespace Models.DTOs
+﻿namespace Models.DTOs.Like
 {
     public class LikeDto
     {
         public int UserId { get; set; }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         public int Age { get; set; }
 

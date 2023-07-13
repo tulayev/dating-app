@@ -1,4 +1,6 @@
-﻿using API.Repositories.Repository;
+﻿using API.Repositories.Repository.Like;
+using API.Repositories.Repository.Message;
+using API.Repositories.Repository.User;
 using AutoMapper;
 using Data;
 
@@ -19,6 +21,8 @@ namespace API.Repositories
         public IUserRepository UserRepository => new UserRepository(_context, _mapper);
 
         public ILikeRepository LikesRepository => new LikeRepository(_context, _mapper);
+
+        public IMessageRepository MessageRepository => new MessageRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {

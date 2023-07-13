@@ -1,4 +1,6 @@
-﻿using API.Repositories.Repository;
+﻿using API.Repositories.Repository.Like;
+using API.Repositories.Repository.Message;
+using API.Repositories.Repository.User;
 
 namespace API.Repositories
 {
@@ -7,6 +9,8 @@ namespace API.Repositories
         IUserRepository UserRepository { get; }
 
         ILikeRepository LikesRepository { get; }
+        
+        IMessageRepository MessageRepository { get; }
         
         Task<bool> Complete();
         

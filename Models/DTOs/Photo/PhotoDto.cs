@@ -1,4 +1,4 @@
-﻿namespace Models.DTOs
+﻿namespace Models.DTOs.Photo
 {
     public class PhotoDto
     {

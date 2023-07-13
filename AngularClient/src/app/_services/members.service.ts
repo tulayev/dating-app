@@ -4,10 +4,10 @@ import { environment } from 'src/environments/environment'
 import { Member } from '../_models/member'
 import { of } from 'rxjs'
 import { map, take } from 'rxjs/operators'
-import PaginatedResult from '../_models/pagination'
 import UserParams from '../_models/userParams'
 import { AccountService } from './account.service'
 import User from '../_models/user'
+import { getPaginatedResult } from '../utils/paginationHelper'
 
 @Injectable({
 	providedIn: 'root'
@@ -25,21 +25,6 @@ export class MembersService {
 			this.user = user
 			this.userParams = new UserParams(user)
 		})
-	}
-
-	private getPaginatedResult<T>(url: string, params: HttpParams) {
-		const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>()
-
-		return this.http.get<T>(url, { observe: 'response', params }).pipe(
-			map(response => {
-				paginatedResult.result = response.body
-
-				if (response.headers.get('Pagination') !== null) 
-					paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
-
-				return paginatedResult
-			})
-		)
 	}
 
 	getUserParams() {
@@ -69,7 +54,7 @@ export class MembersService {
 		params = params.append('gender', userParams.gender)
 		params = params.append('orderBy', userParams.orderBy)
 
-		return this.getPaginatedResult<Member[]>(`${this.baseUrl}/users`, params)
+		return getPaginatedResult<Member[]>(`${this.baseUrl}/users`, params, this.http)
 			.pipe(map(response => {
 				this.memberCache.set(Object.values(userParams).join('-'), response)
 				return response
@@ -79,7 +64,7 @@ export class MembersService {
 	getMember(username: string) {
 		const member = [...this.memberCache.values()]
 			.reduce((arr, elem) => arr.concat(elem.result), [])
-			.find((member: Member) => member.username === username)
+			.find((member: Member) => member.userName === username)
 
 		if (member)
 			return of(member)
@@ -108,12 +93,12 @@ export class MembersService {
 		return this.http.post(`${this.baseUrl}/likes/${username}`, {})
 	}
 
-	getLikes(predicate: string, pageNumber, pageSize) {
+	getLikes(predicate: string, pageNumber: number, pageSize: number) {
 		let params = new HttpParams()
 		params = params.append('pageNumber', pageNumber.toString())
 		params = params.append('pageSize', pageSize.toString())
 		params = params.append('predicate', predicate)
 
-		return this.getPaginatedResult<Partial<Member[]>>(`${this.baseUrl}/likes`, params)
+		return getPaginatedResult<Partial<Member[]>>(`${this.baseUrl}/likes`, params, this.http)
 	}
 }

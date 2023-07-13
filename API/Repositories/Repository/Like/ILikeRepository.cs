@@ -1,8 +1,8 @@
 ﻿using API.Helpers;
-using Models.DTOs;
 using Models;
+using Models.DTOs.Like;
 
-namespace API.Repositories.Repository
+namespace API.Repositories.Repository.Like
 {
     public interface ILikeRepository
     {

@@ -1,4 +1,4 @@
-import User from "./user"
+import User from './user'
 
 export default class UserParams {
     gender: string

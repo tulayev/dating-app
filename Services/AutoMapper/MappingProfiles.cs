@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using Models;
-using Models.DTOs;
+using Models.DTOs.Auth;
+using Models.DTOs.Like;
+using Models.DTOs.Member;
+using Models.DTOs.Message;
+using Models.DTOs.Photo;
 
 namespace Services.AutoMapper
 {
@@ -21,6 +25,10 @@ namespace Services.AutoMapper
                 .ForMember(d => d.UserId, o => o.MapFrom(s => s.Id)) 
                 .ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(p => p.IsMain).Url)) 
                 .ForMember(d => d.Age, o => o.MapFrom(s => s.GetAge())); 
+
+            CreateMap<Message, MessageDto>()
+                .ForMember(d => d.SenderPhotoUrl, o => o.MapFrom(s => s.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
         }
     }
 }

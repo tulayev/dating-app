@@ -4,7 +4,7 @@ using API.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.DTOs;
+using Models.DTOs.Like;
 
 namespace API.Controllers
 {

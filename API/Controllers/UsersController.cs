@@ -5,7 +5,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.DTOs;
+using Models.DTOs.Member;
+using Models.DTOs.Photo;
 using Services.PhotoUploadService;
 
 namespace API.Controllers
@@ -29,11 +30,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MemberDto>>> GetMembers([FromQuery]UserParams userParams)
         {
-            var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUserName());
             userParams.CurrentUsername = User.GetUserName();
-
-            if (string.IsNullOrEmpty(userParams.Gender))
-                userParams.Gender = gender == "male" ? "female" : "male";
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 

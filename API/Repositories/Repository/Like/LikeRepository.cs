@@ -1,23 +1,23 @@
 ﻿using API.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Models.DTOs;
 using Models;
 using Data;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Models.DTOs.Like;
 
-namespace API.Repositories.Repository
+namespace API.Repositories.Repository.Like
 {
     public class LikeRepository : ILikeRepository
     {
         private readonly DataContext _context;
 
         private readonly IMapper _mapper;
-        
+
         public LikeRepository(DataContext context, IMapper mapper)
         {
             _context = context;
-            _mapper = mapper;   
+            _mapper = mapper;
         }
 
         public async Task<UserLike> GetUserLike(int sourceUserId, int likedUserId)

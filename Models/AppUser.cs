@@ -12,7 +12,7 @@
 
         public string KnownAs { get; set; }
 
-        public DateTime LastActive { get; set; } = DateTime.Now;
+        public DateTime LastActive { get; set; } = DateTime.UtcNow;
 
         public string Gender { get; set; }
 
@@ -31,6 +31,10 @@
         public ICollection<UserLike> LikedByUsers { get; set; }
 
         public ICollection<UserLike> LikedUsers { get; set; }
+
+        public ICollection<Message> MessagesSent { get; set; }
+
+        public ICollection<Message> MessagesReceived { get; set; }
 
         public int GetAge()
         {

@@ -2,11 +2,11 @@
 using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Models.DTOs;
 using Models;
 using AutoMapper.QueryableExtensions;
+using Models.DTOs.Member;
 
-namespace API.Repositories.Repository
+namespace API.Repositories.Repository.User
 {
     public class UserRepository : IUserRepository
     {
@@ -22,6 +22,11 @@ namespace API.Repositories.Repository
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
+            var gender = await GetUserGender(userParams.CurrentUsername);
+
+            if (string.IsNullOrWhiteSpace(userParams.Gender))
+                userParams.Gender = gender == "male" ? "female" : "male";
+
             var query = _context.Users.AsQueryable();
 
             query = query.Where(x => x.UserName != userParams.CurrentUsername);
@@ -69,7 +74,7 @@ namespace API.Repositories.Repository
         {
             return await _context.Users
                 .Include(x => x.Photos)
-                .SingleOrDefaultAsync(x => x.UserName == userName);
+                .FirstOrDefaultAsync(x => x.UserName == userName);
         }
 
         public async Task<string> GetUserGender(string userName)
