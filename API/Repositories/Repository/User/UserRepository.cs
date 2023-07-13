@@ -22,14 +22,14 @@ namespace API.Repositories.Repository.User
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var gender = await GetUserGender(userParams.CurrentUsername);
+            var gender = await GetUserGender(userParams.CurrentUserName);
 
             if (string.IsNullOrWhiteSpace(userParams.Gender))
                 userParams.Gender = gender == "male" ? "female" : "male";
 
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(x => x.UserName != userParams.CurrentUsername);
+            query = query.Where(x => x.UserName != userParams.CurrentUserName);
             query = query.Where(x => x.Gender == userParams.Gender);
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);

@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<MessageDto>> GetMessagesForUser([FromQuery] MessageParams messageParams)
         {
-            messageParams.Username = User.GetUserName();
+            messageParams.UserName = User.GetUserName();
 
             var messages = await _unitOfWork.MessageRepository.GetMessageForUser(messageParams);
 

@@ -30,7 +30,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MemberDto>>> GetMembers([FromQuery]UserParams userParams)
         {
-            userParams.CurrentUsername = User.GetUserName();
+            userParams.CurrentUserName = User.GetUserName();
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
