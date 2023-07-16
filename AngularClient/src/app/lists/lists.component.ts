@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { MembersService } from '../_services/members.service'
+import { MemberService } from '../_services/member.service'
 import { Member } from '../_models/member'
 import { Pagination } from '../_models/pagination'
 
@@ -15,7 +15,7 @@ export class ListsComponent implements OnInit {
 	pageSize = 5
 	pagination: Pagination
 
-	constructor(private memberService: MembersService) { }
+	constructor(private memberService: MemberService) { }
 
 	ngOnInit(): void {
 		this.loadLikes()

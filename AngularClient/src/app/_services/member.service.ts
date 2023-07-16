@@ -13,7 +13,7 @@ import { getPaginatedResult } from '../utils/paginationHelper'
 	providedIn: 'root'
 })
 
-export class MembersService {
+export class MemberService {
 	baseUrl = environment.apiUrl
 	members: Member[] = []
 	memberCache = new Map()

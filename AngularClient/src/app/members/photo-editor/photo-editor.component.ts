@@ -5,7 +5,7 @@ import { Member } from 'src/app/_models/member'
 import Photo from 'src/app/_models/photo'
 import User from 'src/app/_models/user'
 import { AccountService } from 'src/app/_services/account.service'
-import { MembersService } from 'src/app/_services/members.service'
+import { MemberService } from 'src/app/_services/member.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -21,7 +21,7 @@ export class PhotoEditorComponent implements OnInit {
 	baseUrl = environment.apiUrl
 	user: User
 
-	constructor(private accountService: AccountService, private memberService: MembersService) { 
+	constructor(private accountService: AccountService, private memberService: MemberService) { 
 		this.accountService.currentUser$.pipe(take(1))
 			.subscribe(user => this.user = user)
 	}
