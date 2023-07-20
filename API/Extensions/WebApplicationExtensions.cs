@@ -1,5 +1,7 @@
 ﻿using Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace API.Extensions
 {
@@ -13,8 +15,10 @@ namespace API.Extensions
                 try
                 {
                     var db = services.GetRequiredService<DataContext>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                     await db.Database.MigrateAsync();
-                    await Seed.SeedUsers(db);
+                    await Seed.SeedUsers(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
