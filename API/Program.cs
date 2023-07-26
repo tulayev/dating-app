@@ -1,5 +1,6 @@
 using API.Extensions;
 using API.Middlewares;
+using Services.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAppServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddSignalR();
 
 var app = await builder.Build().MigrateDatabaseAsync();
 
@@ -27,12 +29,21 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
-app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+app.UseRouting();
+
+app.UseCors(policy => policy.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:4200")
+);
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<PresenceHub>("hubs/presence"); 
+});
 
 app.Run();
