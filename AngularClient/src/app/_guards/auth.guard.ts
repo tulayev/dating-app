@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core'
-import { CanActivate } from '@angular/router'
+
 import { Observable } from 'rxjs'
 import { AccountService } from '../_services/account.service'
 import { map } from 'rxjs/operators'
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators'
 	providedIn: 'root'
 })
 
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
 	constructor(private accountService: AccountService, private toastr: ToastrService) {}
 
 	canActivate(): Observable<boolean> {
