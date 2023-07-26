@@ -49,11 +49,11 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 		TextInputComponent,
 		DateInputComponent,
 		MemberMessagesComponent,
-  AdminPanelComponent,
-  HasRoleDirective,
-  UserManagementComponent,
-  PhotoManagementComponent,
-  RolesModalComponent
+		AdminPanelComponent,
+		HasRoleDirective,
+		UserManagementComponent,
+		PhotoManagementComponent,
+		RolesModalComponent
 	],
 	imports: [
 		BrowserModule,
