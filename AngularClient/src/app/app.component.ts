@@ -1,8 +1,8 @@
-import { AccountService } from './_services/account.service'
+import { AccountService } from './services/account.service'
 import { Component, OnInit } from '@angular/core'
 import { getItemFromLocalStorage } from './utils/localStorage'
-import User from './_models/user'
-import { PresenceService } from './_services/presence.service'
+import User from './models/user'
+import { PresenceService } from './services/presence.service'
 
 @Component({
 	selector: 'app-root',

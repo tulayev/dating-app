@@ -5,31 +5,31 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { SharedModule } from './_modules/shared.module'
+import { SharedModule } from './modules/shared.module'
 import { AppComponent } from './app.component'
-import { NavComponent } from './nav/nav.component'
-import { HomeComponent } from './home/home.component'
-import { RegisterComponent } from './register/register.component'
-import { MemberListComponent } from './members/member-list/member-list.component'
-import { MemberDetailComponent } from './members/member-detail/member-detail.component'
-import { ListsComponent } from './lists/lists.component'
-import { MessagesComponent } from './messages/messages.component'
-import { NotFoundComponent } from './errors/not-found/not-found.component'
-import { ServerErrorComponent } from './errors/server-error/server-error.component'
-import { MemberCardComponent } from './members/member-card/member-card.component'
-import { MemberEditComponent } from './members/member-edit/member-edit.component'
-import { ErrorInterceptor } from './_interceptors/error.interceptor'
-import { JwtInterceptor } from './_interceptors/jwt.interceptor'
-import { LoadingInterceptor } from './_interceptors/loading.interceptor';
-import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { TextInputComponent } from './_forms/text-input/text-input.component';
-import { DateInputComponent } from './_forms/date-input/date-input.component';
-import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
-import { HasRoleDirective } from './_directives/has-role.directive';
-import { UserManagementComponent } from './admin/user-management/user-management.component';
-import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
-import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
+import { NavComponent } from './components/nav/nav.component'
+import { HomeComponent } from './components/home/home.component'
+import { RegisterComponent } from './components/register/register.component'
+import { MemberListComponent } from './components/members/member-list/member-list.component'
+import { MemberDetailComponent } from './components/members/member-detail/member-detail.component'
+import { ListsComponent } from './components/lists/lists.component'
+import { MessagesComponent } from './components/messages/messages.component'
+import { NotFoundComponent } from './components/errors/not-found/not-found.component'
+import { ServerErrorComponent } from './components/errors/server-error/server-error.component'
+import { MemberCardComponent } from './components/members/member-card/member-card.component'
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component'
+import { ErrorInterceptor } from './interceptors/error.interceptor'
+import { JwtInterceptor } from './interceptors/jwt.interceptor'
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './components/forms/text-input/text-input.component';
+import { DateInputComponent } from './components/forms/date-input/date-input.component';
+import { MemberMessagesComponent } from './components/members/member-messages/member-messages.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { UserManagementComponent } from './components/admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './components/admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './components/modals/roles-modal/roles-modal.component'
 
 @NgModule({
 	declarations: [
