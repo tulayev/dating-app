@@ -1,5 +1,6 @@
 ﻿using API.Helpers;
 using API.Repositories;
+using API.SignalR.Presence;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Services.AutoMapper;
@@ -17,6 +18,7 @@ namespace API.Extensions
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+            services.AddSingleton<PresenceTracker>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();

@@ -15,6 +15,10 @@ namespace Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<Connection> Connections { get; set; }
+
         public DataContext(DbContextOptions options) : base(options)
         {
         }
@@ -77,7 +81,7 @@ namespace Data
 
             foreach (var entity in entities)
             {
-                var now = DateTime.UtcNow; // current datetime
+                var now = DateTime.UtcNow;
 
                 if (entity.State == EntityState.Added)
                     ((BaseEntity)entity.Entity).CreatedAt = now;

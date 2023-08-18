@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using Models.DTOs.Message;
 
 namespace API.Repositories.Repository.Message
@@ -17,6 +18,36 @@ namespace API.Repositories.Repository.Message
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        public void AddGroup(Group group)
+        {
+            _context.Groups.Add(group); 
+        }
+
+        public async Task<Connection> GetConnection(string connectiondId)
+        {
+            return await _context.Connections.FindAsync(connectiondId);
+        }
+
+        public async Task<Group> GetMessageGroup(string groupName)
+        {
+            return await _context.Groups
+                .Include(x => x.Connections)
+                .FirstOrDefaultAsync(x => x.Name == groupName);
+        }
+
+        public async Task<Group> GetGroupForConnection(string connectionId)
+        {
+            return await _context.Groups 
+                .Include(x => x.Connections)
+                .Where(x => x.Connections.Any(x => x.ConnectionId == connectionId))
+                .FirstOrDefaultAsync();
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            _context.Connections.Remove(connection);
         }
 
         public void AddMessage(Models.Message message)

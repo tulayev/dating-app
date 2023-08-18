@@ -1,6 +1,7 @@
 using API.Extensions;
 using API.Middlewares;
-using Services.SignalR;
+using API.SignalR.Message;
+using API.SignalR.Presence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapHub<PresenceHub>("hubs/presence"); 
+    endpoints.MapHub<MessageHub>("hubs/message"); 
 });
 
 app.Run();
