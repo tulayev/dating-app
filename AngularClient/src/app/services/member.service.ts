@@ -4,15 +4,14 @@ import { environment } from 'src/environments/environment'
 import { Member } from '../models/member'
 import { of } from 'rxjs'
 import { map, take } from 'rxjs/operators'
-import UserParams from '../models/userParams'
+import { UserParams } from '../models/userParams'
 import { AccountService } from './account.service'
-import User from '../models/user'
+import { User } from '../models/user'
 import { getPaginatedResult } from '../utils/paginationHelper'
 
 @Injectable({
 	providedIn: 'root'
 })
-
 export class MemberService {
 	baseUrl = environment.apiUrl
 	members: Member[] = []

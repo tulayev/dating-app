@@ -28,8 +28,7 @@ namespace API.SignalR.Message
 
         private string GetGroupName(string caller, string other)
         {
-            bool stringCompare = string.CompareOrdinal(caller, other) < 0;
-            return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
+            return string.CompareOrdinal(caller, other) < 0 ? $"{caller}-{other}" : $"{other}-{caller}";
         }
 
         private async Task<Group> AddToGroup(string groupName)
@@ -45,10 +44,9 @@ namespace API.SignalR.Message
 
             group.Connections.Add(connection);
 
-            if (await _unitOfWork.Complete())
-                return group;
-
-            throw new HubException("Failed to join group");
+            await _unitOfWork.SaveChanges();
+            
+            return group;
         }
 
         private async Task<Group> RemoveFromMessageGroup()
@@ -57,11 +55,10 @@ namespace API.SignalR.Message
             var connection = group.Connections.FirstOrDefault(x => x.ConnectionId ==  Context.ConnectionId);
 
             _unitOfWork.MessageRepository.RemoveConnection(connection);
-            
-            if (await _unitOfWork.Complete())
-                return group;
 
-            throw new HubException("Failed to remove hub");
+            await _unitOfWork.SaveChanges();
+                
+            return group;
         }
 
         public async Task SendMessage(CreateMessageDto createMessageDto)
@@ -103,8 +100,9 @@ namespace API.SignalR.Message
 
             _unitOfWork.MessageRepository.AddMessage(message);
 
-            if (await _unitOfWork.Complete()) 
-                await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
+            await _unitOfWork.SaveChanges();
+            
+            await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
         }
 
         public override async Task OnConnectedAsync()

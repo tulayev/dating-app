@@ -9,7 +9,6 @@ import { PresenceService } from 'src/app/services/presence.service'
 	templateUrl: './member-card.component.html',
 	styleUrls: ['./member-card.component.css']
 })
-
 export class MemberCardComponent implements OnInit {
 	@Input() member: Member
 

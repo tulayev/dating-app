@@ -17,9 +17,9 @@ namespace API.Helpers
             var unitOfWork = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
             var user = await unitOfWork.UserRepository.GetUserByIdAsync(userId);
 
-            user.LastActive = DateTime.Now;
+            user.LastActive = DateTime.UtcNow;
 
-            await unitOfWork.Complete();
+            await unitOfWork.SaveChanges();
         }
     }
 }

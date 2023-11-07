@@ -1,4 +1,6 @@
-export default interface Message {
+export type MessageContainer = 'Unread' | 'Inbox' | 'Outbox'
+
+export interface Message {
     id: number
     senderId: number
     senderUserName: string

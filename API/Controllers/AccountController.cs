@@ -12,11 +12,8 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly UserManager<AppUser> _userManager;
-        
         private readonly SignInManager<AppUser> _signInManager;
-        
         private readonly IMapper _mapper;
-        
         private readonly ITokenService _tokenService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, ITokenService tokenService)
@@ -27,8 +24,10 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
-        private async Task<bool> UserExists(string username) =>
-            await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
+        private async Task<bool> UserExists(string username)
+        {
+            return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)

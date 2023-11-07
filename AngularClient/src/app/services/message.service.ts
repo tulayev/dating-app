@@ -2,16 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { getPaginatedResult } from '../utils/paginationHelper'
-import Message from '../models/message'
+import { Message } from '../models/message'
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr'
-import User from '../models/user'
+import { User } from '../models/user'
 import { BehaviorSubject, take } from 'rxjs'
-import Group from '../models/group'
+import { Group } from '../models/group'
 
 @Injectable({
 	providedIn: 'root'
 })
-
 export class MessageService {
 	private baseUrl = environment.apiUrl
 	private hubUrl = environment.hubUrl
@@ -65,7 +64,7 @@ export class MessageService {
 		let params = new HttpParams()
 		params = params.append('pageNumber', pageNumber.toString())
 		params = params.append('pageSize', pageSize.toString())
-		params = params.append('container', container)
+		params = params.append('messageContainer', container)
 
 		return getPaginatedResult<Message[]>(`${this.baseUrl}/messages`, params, this.http)
 	}

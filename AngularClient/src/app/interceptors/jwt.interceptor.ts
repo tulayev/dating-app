@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core'
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { AccountService } from '../services/account.service'
-import User from '../models/user'
+import { User } from '../models/user'
 import { take } from 'rxjs/operators'
 
 @Injectable()
-
 export class JwtInterceptor implements HttpInterceptor {
 
   	constructor(private accountService: AccountService) {}

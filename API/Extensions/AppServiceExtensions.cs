@@ -24,6 +24,7 @@ namespace API.Extensions
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
             return services;
         }

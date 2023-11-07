@@ -20,9 +20,7 @@ import { FileUploadModule } from 'ng2-file-upload'
 		BsDatepickerModule.forRoot(),
 		ButtonsModule.forRoot(),
 		PaginationModule.forRoot(),
-		ToastrModule.forRoot({
-			positionClass: 'toast-bottom-right'
-		}),
+		ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
 		TabsModule.forRoot(),
 		ModalModule.forRoot(),
 		TimeagoModule.forRoot(),
@@ -44,5 +42,4 @@ import { FileUploadModule } from 'ng2-file-upload'
 		FileUploadModule
 	]
 })
-
 export class SharedModule { }

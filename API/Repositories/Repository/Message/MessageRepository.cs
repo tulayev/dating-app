@@ -11,7 +11,6 @@ namespace API.Repositories.Repository.Message
     public class MessageRepository : IMessageRepository
     {
         private readonly DataContext _context;
-
         private readonly IMapper _mapper;
 
         public MessageRepository(DataContext context, IMapper mapper)
@@ -74,10 +73,10 @@ namespace API.Repositories.Repository.Message
                 .OrderByDescending(x => x.MessageSent)
                 .AsQueryable();
 
-            query = messageParams.Container switch
+            query = messageParams.MessageContainer switch
             {
-                "Inbox" => query.Where(x => x.RecipientUserName == messageParams.UserName && !x.RecipientDeleted),
-                "Outbox" => query.Where(x => x.SenderUserName == messageParams.UserName && !x.SenderDeleted),
+                MessageContainer.Inbox => query.Where(x => x.RecipientUserName == messageParams.UserName && !x.RecipientDeleted),
+                MessageContainer.Outbox => query.Where(x => x.SenderUserName == messageParams.UserName && !x.SenderDeleted),
                 _ => query.Where(x => x.RecipientUserName == messageParams.UserName && !x.RecipientDeleted && x.DateRead == null)
             };
 

@@ -12,7 +12,7 @@ namespace API.Repositories
         
         IMessageRepository MessageRepository { get; }
         
-        Task<bool> Complete();
+        Task SaveChanges();
         
         bool HasChanges();
     }

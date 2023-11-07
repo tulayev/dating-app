@@ -15,9 +15,7 @@ namespace API.Controllers
     public class UsersController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
-        
         private readonly IMapper _mapper;
-
         private readonly IPhotoService _photoService;
 
         public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
@@ -54,10 +52,9 @@ namespace API.Controllers
 
             _unitOfWork.UserRepository.Update(user);
 
-            if (await _unitOfWork.Complete()) 
-                return NoContent();
-
-            return BadRequest("Failed to update user");
+            await _unitOfWork.SaveChanges();
+                
+            return NoContent();
         }
 
         [HttpPost("upload-photo")]
@@ -81,10 +78,9 @@ namespace API.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _unitOfWork.Complete())
-                return CreatedAtRoute("GetMember", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
-
-            return BadRequest("Problem addding photo");
+            await _unitOfWork.SaveChanges();
+            
+            return CreatedAtRoute("GetMember", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
         }
 
         [HttpPut("set-main-photo/{photoId}")]
@@ -104,10 +100,9 @@ namespace API.Controllers
             
             photo.IsMain = true;
 
-            if (await _unitOfWork.Complete()) 
-                return NoContent();
-
-            return BadRequest("Failed to set main photo");
+            await _unitOfWork.SaveChanges(); 
+                
+            return NoContent();
         }
 
         [HttpDelete("delete-photo/{photoId}")]
@@ -133,10 +128,9 @@ namespace API.Controllers
 
             user.Photos.Remove(photo);
 
-            if (await _unitOfWork.Complete()) 
-                return Ok();
-
-            return BadRequest("Failed to delete the photo");
+            await _unitOfWork.SaveChanges();
+                
+            return Ok();
         }
     }
 }

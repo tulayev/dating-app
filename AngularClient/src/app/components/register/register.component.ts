@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr'
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { AccountService } from '../../services/account.service'
-import { AbstractControl, UntypedFormBuilder, FormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms'
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 
 @Component({
@@ -9,9 +9,8 @@ import { Router } from '@angular/router'
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.css']
 })
-
 export class RegisterComponent implements OnInit {
-	@Output() cancelRegister = new EventEmitter()
+	@Output() cancelRegister = new EventEmitter<boolean>()
 	registerForm: UntypedFormGroup
 	maxDate: Date
 	validationErrors: string[] = []
@@ -49,11 +48,10 @@ export class RegisterComponent implements OnInit {
 
 	register() {
 		this.accountService.register(this.registerForm.value)
-			.subscribe(response => {
-				this.router.navigateByUrl('/members')
-			}, error => {
-				this.validationErrors = error
-			})
+			.subscribe({
+                next: () => this.router.navigateByUrl('/members'),
+                error: (error) => this.validationErrors = error
+            })
 	}
 
 	cancel() {

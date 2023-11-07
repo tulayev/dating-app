@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core'
 import { FileUploader } from 'ng2-file-upload'
 import { take } from 'rxjs/operators'
 import { Member } from 'src/app/models/member'
-import Photo from 'src/app/models/photo'
-import User from 'src/app/models/user'
+import { Photo } from 'src/app/models/photo'
+import { User } from 'src/app/models/user'
 import { AccountService } from 'src/app/services/account.service'
 import { MemberService } from 'src/app/services/member.service'
 import { environment } from 'src/environments/environment'
@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment'
 	templateUrl: './photo-editor.component.html',
 	styleUrls: ['./photo-editor.component.css']
 })
-
 export class PhotoEditorComponent implements OnInit {
 	@Input() member: Member
 	uploader: FileUploader

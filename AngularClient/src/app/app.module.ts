@@ -71,5 +71,4 @@ import { RolesModalComponent } from './components/modals/roles-modal/roles-modal
 	],
 	bootstrap: [AppComponent]
 })
-
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { AccountService } from './services/account.service'
 import { Component, OnInit } from '@angular/core'
 import { getItemFromLocalStorage } from './utils/localStorage'
-import User from './models/user'
+import { User } from './models/user'
 import { PresenceService } from './services/presence.service'
 
 @Component({
@@ -9,10 +9,8 @@ import { PresenceService } from './services/presence.service'
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-
 export class AppComponent implements OnInit {
 	title = 'Dating App'
-	users: any
 
 	constructor(private accountService: AccountService, private presence: PresenceService) {}
 

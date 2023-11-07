@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators'
 @Injectable({
 	providedIn: 'root'
 })
-
 export class AdminGuard  {
 
 	constructor(private accountService: AccountService, private toastr: ToastrService) { }

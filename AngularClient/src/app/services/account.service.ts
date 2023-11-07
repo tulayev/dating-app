@@ -4,14 +4,13 @@ import { ReplaySubject } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { nameOf } from '../utils/helpers'
 import { setItemToLocalStorage, removeItemFromLocalStorage } from '../utils/localStorage'
-import User from '../models/user'
+import { User } from '../models/user'
 import { environment } from 'src/environments/environment'
 import { PresenceService } from './presence.service'
 
 @Injectable({
   	providedIn: 'root'
 })
-
 export class AccountService {
 	private baseUrl = environment.apiUrl
 	private currentUserSource = new ReplaySubject<User>(1)

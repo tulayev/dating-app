@@ -15,10 +15,10 @@
         <div class="form-check" *ngFor="let role of roles">
             <input 
                 type="checkbox"
-                [checked]="role.checked" 
                 value="role.name"
-                (change)="role.checked = !role.checked"
+                [checked]="role.checked" 
                 [disabled]="role.name === 'Admin' && user.userName === 'admin'"
+                (change)="role.checked = !role.checked"
             />
             <label>{{ role.name }}</label>
         </div>

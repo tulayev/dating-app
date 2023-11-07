@@ -3,12 +3,12 @@ using System.Text.Json;
 
 namespace API.Middlewares
 {
+    public record ApiException(int StatusCode, string Message = null, string Details = null);
+
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        
         private readonly ILogger<ExceptionMiddleware> _logger;
-        
         private readonly IHostEnvironment _env;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)

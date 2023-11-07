@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr'
 import { take } from 'rxjs/operators'
 import { Member } from 'src/app/models/member'
-import User from 'src/app/models/user'
+import { User } from 'src/app/models/user'
 import { AccountService } from 'src/app/services/account.service'
 import { MemberService } from 'src/app/services/member.service'
 
@@ -12,7 +12,6 @@ import { MemberService } from 'src/app/services/member.service'
 	templateUrl: './member-edit.component.html',
 	styleUrls: ['./member-edit.component.css']
 })
-
 export class MemberEditComponent implements OnInit {
 	@ViewChild('editForm') editForm: NgForm
 	@HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {

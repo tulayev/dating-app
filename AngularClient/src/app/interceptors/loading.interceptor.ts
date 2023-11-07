@@ -5,7 +5,6 @@ import { Observable } from 'rxjs'
 import { delay, finalize } from 'rxjs/operators'
 
 @Injectable()
-
 export class LoadingInterceptor implements HttpInterceptor {
 
 	constructor(private busyService: BusyService) {}

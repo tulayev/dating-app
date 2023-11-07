@@ -5,7 +5,7 @@ export interface Pagination {
     totalPages: number
 }
 
-export default class PaginatedResult<T> {
+export class PaginatedResult<T> {
     result: T
     pagination: Pagination
 }

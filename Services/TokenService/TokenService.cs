@@ -11,12 +11,11 @@ namespace Services.TokenService
     public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey _key;
-
         private readonly UserManager<AppUser> _userManager;
 
         public TokenService(IConfiguration config, UserManager<AppUser> userManager)
         {
-            _key = new (Encoding.UTF8.GetBytes(config["TokenKey"]));
+            _key = new(Encoding.UTF8.GetBytes(config["TokenKey"]));
             _userManager = userManager;
         }
 
@@ -32,12 +31,12 @@ namespace Services.TokenService
 
             claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds
             };
 

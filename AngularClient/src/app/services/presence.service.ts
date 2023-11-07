@@ -2,14 +2,13 @@ import { environment } from 'src/environments/environment'
 import { Injectable } from '@angular/core'
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr'
 import { ToastrService } from 'ngx-toastr'
-import User from '../models/user'
+import { User } from '../models/user'
 import { BehaviorSubject, take } from 'rxjs'
 import { Router } from '@angular/router'
 
 @Injectable({
 	providedIn: 'root'
 })
-
 export class PresenceService {
 	private hubUrl = environment.hubUrl
 	private hubConnection: HubConnection

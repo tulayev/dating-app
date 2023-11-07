@@ -4,8 +4,8 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs'
 import { take } from 'rxjs'
 import { Member } from 'src/app/models/member'
-import Message from 'src/app/models/message'
-import User from 'src/app/models/user'
+import { Message }from 'src/app/models/message'
+import { User } from 'src/app/models/user'
 import { AccountService } from 'src/app/services/account.service'
 import { MessageService } from 'src/app/services/message.service'
 import { PresenceService } from 'src/app/services/presence.service'
@@ -15,7 +15,6 @@ import { PresenceService } from 'src/app/services/presence.service'
 	templateUrl: './member-detail.component.html',
 	styleUrls: ['./member-detail.component.css']
 })
-
 export class MemberDetailComponent implements OnInit, OnDestroy {
 	@ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent
 	user: User
@@ -26,10 +25,10 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 	activeTab: TabDirective
 
 	constructor(private route: ActivatedRoute, private messageService: MessageService,
-		private accountService: AccountService, private router: Router,
-		public presenceService: PresenceService) {
+		private accountService: AccountService, private router: Router, public presenceService: PresenceService) 
+    {
 		this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user)
-		this.router.routeReuseStrategy()
+		//this.router.routeReuseStrategy()
 	}
 
 	ngOnInit(): void {

@@ -31,7 +31,7 @@ namespace Services.AutoMapper
                 .ForMember(d => d.RecipientPhotoUrl, o => o.MapFrom(s => s.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
 
             CreateMap<DateTime, DateTime>()
-                .ConstructUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+                .ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
         }
     }
 }

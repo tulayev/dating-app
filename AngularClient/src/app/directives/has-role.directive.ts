@@ -1,12 +1,11 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core'
 import { AccountService } from '../services/account.service'
 import { take } from 'rxjs/operators'
-import User from '../models/user'
+import { User } from '../models/user'
 
 @Directive({
 	selector: '[appHasRole]'
 })
-
 export class HasRoleDirective implements OnInit {
 	@Input() appHasRole: string[]
 	user: User

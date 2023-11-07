@@ -7,7 +7,6 @@ import { MemberService } from '../services/member.service'
 @Injectable({
 	providedIn: 'root'
 })
-
 export class MemberDetailedResolver  {
 	constructor(private memberService: MemberService) {}
 

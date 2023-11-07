@@ -9,8 +9,10 @@ namespace API.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
-
         private readonly IMapper _mapper;
+        public IUserRepository UserRepository => new UserRepository(_context, _mapper);
+        public ILikeRepository LikesRepository => new LikeRepository(_context, _mapper);
+        public IMessageRepository MessageRepository => new MessageRepository(_context, _mapper);
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -18,15 +20,9 @@ namespace API.Repositories
             _mapper = mapper;
         }
 
-        public IUserRepository UserRepository => new UserRepository(_context, _mapper);
-
-        public ILikeRepository LikesRepository => new LikeRepository(_context, _mapper);
-
-        public IMessageRepository MessageRepository => new MessageRepository(_context, _mapper);
-
-        public async Task<bool> Complete()
+        public async Task SaveChanges()
         {
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
         }
 
         public bool HasChanges()

@@ -11,7 +11,6 @@ namespace API.Repositories.Repository.User
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-
         private readonly IMapper _mapper;
 
         public UserRepository(DataContext context, IMapper mapper)
@@ -39,7 +38,7 @@ namespace API.Repositories.Repository.User
 
             query = userParams.OrderBy switch
             {
-                "createdAt" => query.OrderByDescending(x => x.CreatedAt),
+                UserOrder.CreatedAt => query.OrderByDescending(x => x.CreatedAt),
                 _ => query.OrderByDescending(x => x.LastActive)
             };
 

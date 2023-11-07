@@ -4,7 +4,6 @@ import { NgxSpinnerService } from 'ngx-spinner'
 @Injectable({
 	providedIn: 'root'
 })
-
 export class BusyService {
 	busyRequestCount = 0
 

@@ -1,7 +1,7 @@
 <div class="row mb-4">
-    <div class="btn-group" name="container">
+    <div class="btn-group" name="messageContainer">
         <button 
-            [(ngModel)]="container"
+            [(ngModel)]="messageContainer"
             (click)="loadMessages()"
             btnRadio="Unread"
             class="btn btn-primary" 
@@ -10,7 +10,7 @@
             Unread
         </button>
         <button 
-            [(ngModel)]="container"
+            [(ngModel)]="messageContainer"
             (click)="loadMessages()"
             btnRadio="Inbox"
             class="btn btn-primary" 
@@ -19,7 +19,7 @@
             Inbox
         </button>
         <button 
-            [(ngModel)]="container"
+            [(ngModel)]="messageContainer"
             (click)="loadMessages()"
             btnRadio="Outbox"
             class="btn btn-primary" 
@@ -50,14 +50,14 @@
         </tr>
         <tr 
             *ngFor="let message of messages" 
-            routerLink="{{ container === 'Outbox' ? '/members/' + message.recipientUserName : '/members/' + message.senderUserName }}"
+            routerLink="{{ messageContainer === 'Outbox' ? '/members/' + message.recipientUserName : '/members/' + message.senderUserName }}"
             [queryParams]="{ tab: 3 }"
             [hidden]="loading"
         >
             <td>{{ message.content }}</td>
             <td>{{ message.id }}</td>
             <td>
-                <div *ngIf="container === 'Outbox'">
+                <div *ngIf="messageContainer === 'Outbox'">
                     <img 
                         src="{{ message.recipientPhotoUrl || './assets/user.png' }}" 
                         alt="{{ message.recipientUserName }}" 
@@ -66,7 +66,7 @@
                     <strong>{{ message.recipientUserName | titlecase }}</strong>
                 </div>
 
-                <div *ngIf="container !== 'Outbox'">
+                <div *ngIf="messageContainer !== 'Outbox'">
                     <img 
                         src="{{ message.senderPhotoUrl || './assets/user.png' }}" 
                         alt="{{ message.senderUserName }}" 

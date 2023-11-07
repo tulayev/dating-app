@@ -1,7 +1,6 @@
-import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal'
-import User from 'src/app/models/user'
+import { User } from 'src/app/models/user'
 import { AdminService } from 'src/app/services/admin.service'
 import { RolesModalComponent } from 'src/app/components/modals/roles-modal/roles-modal.component'
 
@@ -10,7 +9,6 @@ import { RolesModalComponent } from 'src/app/components/modals/roles-modal/roles
 	templateUrl: './user-management.component.html',
 	styleUrls: ['./user-management.component.css']
 })
-
 export class UserManagementComponent implements OnInit {
 	users: Partial<User[]>
 	bsModalRef: BsModalRef
