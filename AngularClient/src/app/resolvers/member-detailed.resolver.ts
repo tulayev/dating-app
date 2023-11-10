@@ -8,7 +8,8 @@ import { MemberService } from '../services/member.service'
 	providedIn: 'root'
 })
 export class MemberDetailedResolver  {
-	constructor(private memberService: MemberService) {}
+	
+    constructor(private memberService: MemberService) {}
 
 	resolve(route: ActivatedRouteSnapshot): Observable<Member> {
 		return this.memberService.getMember(route.paramMap.get('username'))
